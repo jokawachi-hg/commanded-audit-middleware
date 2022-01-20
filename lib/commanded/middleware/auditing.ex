@@ -37,8 +37,8 @@ defmodule Commanded.Middleware.Auditing do
       correlation_id: correlation_id,
       occurred_at: occurred_at,
       command_type: Atom.to_string(command.__struct__),
-      data: serialize(filter(command)),
-      metadata: serialize(metadata)
+      data: filter(command),
+      metadata: metadat)
     }
 
     Repo.insert!(audit)
@@ -104,7 +104,10 @@ defmodule Commanded.Middleware.Auditing do
 
   defp monotonic_time, do: System.monotonic_time(:microsecond)
 
-  defp serialize(term), do: serializer().serialize(term)
+  defp serialize(term) do
+    IO.inspect(serializer().serialize(term))
+    serializer().serialize(term)
+  end
 
   defp serializer do
     Application.get_env(:commanded_audit_middleware, :serializer) ||

@@ -17,8 +17,8 @@ defmodule Commanded.Middleware.Auditing.Repo.Migrations.CreateCommandAuditTable 
       add(:command_uuid, :text, primary_key: true)
       add(:occurred_at, :naive_datetime)
       add(:command_type, :text)
-      add(:data, @data_column_db_type, null: false, default: "{}")
-      add(:metadata, @metadata_column_db_type, null: false, default: "{}")
+      add(:data, :map, null: false, default: %{}
+      add(:metadata, :map, null: false, default: %{})
       add(:success, :boolean)
       add(:execution_duration_usecs, :integer)
       add(:error, :text)
