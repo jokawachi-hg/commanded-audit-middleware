@@ -38,7 +38,7 @@ defmodule Commanded.Middleware.Auditing do
       occurred_at: occurred_at,
       command_type: Atom.to_string(command.__struct__),
       data: filter(command),
-      metadata: metadat)
+      metadata: metadata
     }
 
     Repo.insert!(audit)
